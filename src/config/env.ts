@@ -42,11 +42,11 @@ function parsePort(value?: string): number {
 }
 
 export function loadConfig(): Config {
-  const NODE_ENV = parseNodeEnvironment(process.env.NODE_ENV);
+  const NODE_ENV = parseNodeEnvironment(process.env["NODE_ENV"]);
 
   return {
     NODE_ENV,
-    PORT: parsePort(process.env.PORT),
+    PORT: parsePort(process.env["PORT"]),
     isDevelopment: NODE_ENV === NodeEnvironment.Development,
     isTest: NODE_ENV === NodeEnvironment.Testing,
   };

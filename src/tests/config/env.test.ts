@@ -14,8 +14,8 @@ describe("config", () => {
   });
 
   it("defaults NODE_ENV to production when undefined", () => {
-    delete process.env.NODE_ENV;
-    delete process.env.PORT;
+    delete process.env["NODE_ENV"];
+    delete process.env["PORT"];
 
     const config = loadConfig();
 
@@ -26,7 +26,7 @@ describe("config", () => {
   });
 
   it("defaults PORT to 3000 when undefined", () => {
-    delete process.env.PORT;
+    delete process.env["PORT"];
 
     const config = loadConfig();
 
@@ -34,8 +34,8 @@ describe("config", () => {
   });
 
   it("sets development correctly", () => {
-    process.env.NODE_ENV = "development";
-    process.env.PORT = "4000";
+    process.env["NODE_ENV"] = "development";
+    process.env["PORT"] = "4000";
 
     const config = loadConfig();
 
@@ -46,7 +46,7 @@ describe("config", () => {
   });
 
   it("accepts explicit testing value", () => {
-    process.env.NODE_ENV = "testing";
+    process.env["NODE_ENV"] = "testing";
 
     const config = loadConfig();
 
@@ -55,7 +55,7 @@ describe("config", () => {
   });
 
   it("maps test alias to testing", () => {
-    process.env.NODE_ENV = "test";
+    process.env["NODE_ENV"] = "test";
 
     const config = loadConfig();
 
@@ -64,7 +64,7 @@ describe("config", () => {
   });
 
   it("accepts staging environment", () => {
-    process.env.NODE_ENV = "staging";
+    process.env["NODE_ENV"] = "staging";
 
     const config = loadConfig();
 
@@ -72,7 +72,7 @@ describe("config", () => {
   });
 
   it("accepts production environment", () => {
-    process.env.NODE_ENV = "production";
+    process.env["NODE_ENV"] = "production";
 
     const config = loadConfig();
 
@@ -80,25 +80,25 @@ describe("config", () => {
   });
 
   it("throws on invalid NODE_ENV", () => {
-    process.env.NODE_ENV = "invalid";
+    process.env["NODE_ENV"] = "invalid";
 
     expect(() => loadConfig()).toThrow(/Invalid NODE_ENV/);
   });
 
   it("throws on invalid PORT (not a number)", () => {
-    process.env.PORT = "not-a-number";
+    process.env["PORT"] = "not-a-number";
 
     expect(() => loadConfig()).toThrow(/Invalid PORT/);
   });
 
   it("throws on invalid PORT (out of range)", () => {
-    process.env.PORT = "70000";
+    process.env["PORT"] = "70000";
 
     expect(() => loadConfig()).toThrow(/Invalid PORT/);
   });
 
   it("throws on invalid PORT (zero)", () => {
-    process.env.PORT = "0";
+    process.env["PORT"] = "0";
 
     expect(() => loadConfig()).toThrow(/Invalid PORT/);
   });
